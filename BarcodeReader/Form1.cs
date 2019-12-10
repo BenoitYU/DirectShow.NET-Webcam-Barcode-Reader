@@ -104,7 +104,7 @@ namespace BarcodeReaderApp
                 //DsDevice dev = devices[0] as DsDevice;
                 //MessageBox.Show("Device: " + dev.Name);
                 //CaptureVideo();
-                CaptureVideo(devices[1]);
+                CaptureVideo(devices[0]);
             }        
         }
 
@@ -119,7 +119,8 @@ namespace BarcodeReaderApp
             // Read barcodes with Dynamsoft Barcode Reader
             Stopwatch sw = Stopwatch.StartNew();
             sw.Start();
-            BarcodeResult[] results = _barcodeReader.DecodeBitmap(bitmap);
+            TextResult[] results = _barcodeReader.DecodeBitmap(bitmap, "");
+
             sw.Stop();
             Console.WriteLine(sw.Elapsed.TotalMilliseconds + "ms");
             bitmap.Dispose();
@@ -134,7 +135,7 @@ namespace BarcodeReaderApp
             }
 
             // Display barcode results
-            foreach (BarcodeResult result in results)
+            foreach (TextResult result in results)
             {
                 textBox1.AppendText(result.BarcodeText + "\n");
                 textBox1.AppendText("\n");
